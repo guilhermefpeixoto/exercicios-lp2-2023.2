@@ -9,8 +9,8 @@ public class RepareBem {
     private int qtdOs;
 
     public RepareBem() {
-        this.reparos = new Reparo[100];
-        this.ordensDeServico = new OrdemDeServico[500];
+        this.reparos = new Reparo[MAX_REPAROS];
+        this.ordensDeServico = new OrdemDeServico[MAX_OS];
     }
 
     public void cadastrarReparo(String id, String descricao, double preco) {
@@ -88,14 +88,14 @@ public class RepareBem {
     public double obterValorOrdemDeServico(int idOS) {
         OrdemDeServico os = this.ordensDeServico[idOS - 1];
         if (os != null) {
-            return os.getPreco();
+            return os.calculaPreco();
         }
 
         throw new IllegalArgumentException();
     }
 
     public String listarOrdensDeServico(String status) {
-        String oss = "";
+        String oss = "Ordens de Serviço - " + status + "\n\n";
 
         for (int i = 0; i < qtdOs; i++) {
             if (this.ordensDeServico[i].getStatus().equals(status)) {

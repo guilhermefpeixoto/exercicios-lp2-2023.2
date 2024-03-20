@@ -3,22 +3,20 @@ package reparebem;
 public class OrdemDeServico {
     private static int idCount;
     private int id;
-    private String nome;
+    private String cliente;
     private String telefone;
     private String roupa;
     private Reparo[] reparos;
     private int qtdReparos;
-    private double preco;
     private String status;
 
     public OrdemDeServico(String cliente, String telefone, String roupa) {
         this.id = ++idCount;    
-        this.nome = cliente;
+        this.cliente = cliente;
         this.telefone = telefone;
         this.roupa = roupa;
         this.reparos = new Reparo[10];
         this.qtdReparos = 0;
-        this.preco = 0.0;
         this.status = "Não Iniciada";
     }
 
@@ -29,7 +27,6 @@ public class OrdemDeServico {
     public void setReparo(Reparo reparo) {
         if (this.qtdReparos < 10) {
             this.reparos[this.qtdReparos++] = reparo;
-            this.setPreco();
         }
     }
 
@@ -37,12 +34,16 @@ public class OrdemDeServico {
         this.status = status;
     }
 
-    private void setPreco() {
-        this.preco += this.reparos[qtdReparos - 1].getPreco();
-    }
+    public double calculaPreco() {
+        double preco = 0;
+        
+        if (qtdReparos >= 1) {
+            for (int i = 0; i < qtdReparos; i++) {
+                preco += this.reparos[i].getPreco();
+            }
+        }
 
-    public double getPreco() {
-        return this.preco;
+        return preco; 
     }
 
     public String getStatus() {
@@ -51,6 +52,6 @@ public class OrdemDeServico {
 
     @Override
     public String toString() {
-        return "#" + String.valueOf(this.id) + ";" + "cliente:" + this.nome + ";" + "roupa: " + this.roupa + ";" + "reparos: " + String.valueOf(qtdReparos) + "total: R$" + String.valueOf(preco); 
+        return String.format("#%d; cliente: %s; roupa: %s; reparos: %d; total: R$%.2f", this.id, this.cliente, this.roupa, this.qtdReparos, this.calculaPreco());
     }
 }
