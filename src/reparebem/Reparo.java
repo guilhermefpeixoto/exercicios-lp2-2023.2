@@ -15,8 +15,8 @@ public class Reparo {
         return this.idTextual;
     }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
+    public void setPreco(double percentual) {
+        this.preco = preco * percentual;
     }
 
     public double getPreco() {
