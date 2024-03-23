@@ -1,2 +1,2 @@
 # simulado1-lp2
-Possível implementação do primeiro simulado de LP2 2023.2
+Possíveis implementações de simulados e provas de LP2 2023.2
